@@ -54,10 +54,12 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   $ th preprocess.lua VOC
   $ th preprocess.lua VGGF
   ```
-8. Choose a model (our best model is `model/contrastive_s.lua`, next are `model/contrastive_a.lua` and `model/additive.lua`, the least accurate is the repro of Hakan Bilen's [WSDDN](http://github.com/hbilen/WSDDN) named `model/wsddn_repro.lua`) and train it:
+8. Choose a dataset, a model (our best model is `model/contrastive_s.lua`, other choices are `model/contrastive_a.lua`, `model/additive.lua`, and `model/wsddn_repro.lua`) and train it:
 
   ```
-  $ MODEL=model/contrastive_s.lua th train.lua
+  $ export MODEL=model/contrastive_s.lua
+  $ export DATASET=VOC2007
+  $ th train.lua
   ```
 9. Test the trained model and compute CorLoc and mAP:
 
