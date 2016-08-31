@@ -13,11 +13,22 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
 
 # Running the code
 1. Install the dependencies:
-  - [Torch](http://github.com/torch/distro) with cuDNN support
+  - [Torch](http://github.com/torch/distro) with [cuDNN](http://developer.nvidia.com/cudnn) support
   - [HDF5](http://www.hdfgroup.org/HDF5/)
   - [matio](http://github.com/tbeu/matio)
-  - Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch)
-2. Download and unpack the [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) datasets and [selective search windows](http://koen.me/research/selectivesearch/):
+  - [protobuf](http://github.com/google/protobuf)
+  - Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch), [loadcaffe](http://github.com/szagoruyko/loadcaffe)
+  
+  We strongly recommend using [wigwam](http://wigwam.in/) to install these dependencies (fix the paths to `nvcc` and `libcudnn.so` before running the command):
+
+  ```$ wigwam install torch hdf5 matio protobuf lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"```
+2. Clone this repository and change current directory to `data`:
+
+  ```
+  $ git clone https://github.com/vadimkantorov/contextlocnet
+  $ cd ./contextlocnet/data
+  ```
+3. Download and unpack the [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) datasets and [selective search windows](http://koen.me/research/selectivesearch/):
   - VOC 2007:
     
     ```
@@ -28,8 +39,27 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
     
     ```
     $ wget http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCdevkit_18-May-2011.tar
+    $ wget http://people.eecs.berkeley.edu/~rbg/fast-rcnn-data/selective_search_data.tgz
     ```
-3. Clone this repository: `$ git clone https://github.com/vadimkantorov/contextlocnet`
+4. Download the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model:
+  
+  ```
+  $ wget http://www.robots.ox.ac.uk/~vgg/software/deep_eval/releases/bvlc/VGG_CNN_F.caffemodel https://gist.githubusercontent.com/ksimonyan/a32c9063ec8e1118221a/raw/6a3b8af023bae65669a4ceccd7331a5e7767aa4e/VGG_CNN_F_deploy.prototxt
+  ```
+5. Train a model:
+
+  ```
+  $ th train.lua
+  ```
+
+6. Test the trained model and compute CorLoc and mAP:
+  ```
+  $ SUBSET=trainval th test.lua
+  $ th corloc.lua
+  $ SUBSET=test th test.lua
+  $ th detection_mAP.lua
+  ```
+  
 
 # Acknowledgements
 The code is released under the [MIT](http://github.com/vadimkantorov/contextlocnet/blob/master/LICENSE.md) license.
