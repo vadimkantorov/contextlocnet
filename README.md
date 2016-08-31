@@ -17,7 +17,7 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   We strongly recommend using [wigwam](http://wigwam.in/) for this (fix the paths to `nvcc` and `libcudnn.so` before running the command):
 
   ```$ wigwam install torch hdf5 matio protobuf lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"```
-2. Clone this repository, compile the ROI pooling module, and change the current directory to `data`:
+2. Clone this repository, compile the ROI pooling module and change the current directory to `data`:
 
   ```
   $ git clone https://github.com/vadimkantorov/contextlocnet
