@@ -63,6 +63,6 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
 # Acknowledgements & Notes
 We greatly thank Hakan Bilen, Relja Arandjelović and Soumith Chintala for fruitful discussion and help.
 
-This work would not have been possible without prior art: Hakan Bilen's [WSDDN](http://github.com/hbilen/WSDDN), Spyros Gidaris's [LocNet](http://github.com/gidariss/LocNet), Sergey Zagoruyko's [loadcaffe](http://github.com/szagoruyko/loadcaffe).
+This work would not have been possible without prior work: Hakan Bilen's [WSDDN](http://github.com/hbilen/WSDDN), Spyros Gidaris's [LocNet](http://github.com/gidariss/LocNet), Sergey Zagoruyko's [loadcaffe](http://github.com/szagoruyko/loadcaffe), Facebook's [fbnn/Optim.lua](http://github.com/facebook/fbnn/blob/master/fbnn/Optim.lua).
 
 The code is released under the [MIT](http://github.com/vadimkantorov/contextlocnet/blob/master/LICENSE.md) license.
