@@ -7,9 +7,9 @@ If you use this code, please cite our work:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2016}  
 }
 
-The results are available on the [project website](http://www.di.ens.fr/willow/research/contextlocnet) and in the paper.
+The results are available on the [project website](http://www.di.ens.fr/willow/research/contextlocnet) and in the paper. Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov/contextlocnet/issues) directly, for other inquiries please contact [Vadim Kantorov](mailto:vadim.kantorov@gmail.com).
 
-Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov/contextlocnet/issues) directly, for other inquiries please contact [Vadim Kantorov](mailto:vadim.kantorov@gmail.com).
+This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
 
 # Running the code
 1. Install the dependencies:
@@ -28,7 +28,7 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
   $ git clone https://github.com/vadimkantorov/contextlocnet
   $ cd ./contextlocnet/data
   ```
-3. Download and unpack the [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) datasets and [selective search windows](http://koen.me/research/selectivesearch/):
+3. Download the [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) datasets and [selective search windows](http://koen.me/research/selectivesearch/):
   - VOC 2007:
     
     ```
@@ -46,13 +46,19 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
   ```
   $ wget http://www.robots.ox.ac.uk/~vgg/software/deep_eval/releases/bvlc/VGG_CNN_F.caffemodel https://gist.githubusercontent.com/ksimonyan/a32c9063ec8e1118221a/raw/6a3b8af023bae65669a4ceccd7331a5e7767aa4e/VGG_CNN_F_deploy.prototxt
   ```
-5. Train a model:
+5. Unpack the downloaded archives and change current directory to `contextlocnet`:
+
+  ```
+  $ for f in *.tar *.tgz; do tar -xf $f; done
+  $ cd ..
+  ```
+6. Train a model:
 
   ```
   $ th train.lua
   ```
 
-6. Test the trained model and compute CorLoc and mAP:
+7. Test the trained model and compute CorLoc and mAP:
   ```
   $ SUBSET=trainval th test.lua
   $ th corloc.lua
@@ -61,5 +67,9 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
   ```
   
 
-# Acknowledgements
+# Acknowledgements & Notes
+We greatly thank Hakan Bilen, Relja Arandjelović and Soumith Chintala for fruitful discussion and help.
+
+This work would not have been possible without prior art: Hakan Bilen's [WSDDN](http://github.com/hbilen/WSDDN), Spyros Gidaris's [LocNet](http://github.com/gidariss/LocNet), Sergey Zagoruyko's [loadcaffe](http://github.com/szagoruyko/loadcaffe).
+
 The code is released under the [MIT](http://github.com/vadimkantorov/contextlocnet/blob/master/LICENSE.md) license.
