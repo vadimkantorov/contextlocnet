@@ -48,7 +48,7 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   $ for f in *.tar *.tgz; do tar -xf $f; done
   $ cd ..
   ```
-7. Preprocess the VOC data and convert the VGG-F model:
+7. Preprocess the VOC data and convert the VGG-F model to Torch format:
 
   ```
   $ th preprocess.lua VOC
