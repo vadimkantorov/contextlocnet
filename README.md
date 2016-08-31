@@ -16,7 +16,7 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
   - [Torch](http://github.com/torch/distro) with cuDNN support
   - [HDF5](http://www.hdfgroup.org/HDF5/)
   - [matio](http://github.com/tbeu/matio)
-  - Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch): `$ luarocks install rapidjson hdf5 matio`.
+  - Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch)
 2. Download and unpack the [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) datasets and [selective search windows](http://koen.me/research/selectivesearch/):
   - VOC 2007:
     
