@@ -14,3 +14,4 @@ Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov
 # Running the code
 
 # Acknowledgements
+The code is released under the [MIT](https://github.com/vadimkantorov/contextlocnet/blob/master/LICENSE.md) license.
