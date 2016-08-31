@@ -48,12 +48,18 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   $ for f in *.tar *.tgz; do tar -xf $f; done
   $ cd ..
   ```
-7. Train a model:
+7. Preprocess the VOC data and convert the VGG-F model:
 
   ```
-  $ th train.lua
+  $ th preprocess.lua VOC
+  $ th preprocess.lua VGGF
   ```
-8. Test the trained model and compute CorLoc and mAP:
+8. Choose a model (our best model is `model/contrastive_s.lua`, next are `model/contrastive_a.lua` and `model/additive.lua`, the least accurate is the repro of Hakan Bilen's [WSDDN](http://github.com/hbilen/WSDDN) named `model/wsddn_repro.lua`) and train it:
+
+  ```
+  $ MODEL=model/contrastive_s.lua th train.lua
+  ```
+9. Test the trained model and compute CorLoc and mAP:
 
   ```
   $ SUBSET=trainval th test.lua
