@@ -9,7 +9,7 @@ If you use this code, please cite our work:
 
 The results are available on the [project website](http://www.di.ens.fr/willow/research/contextlocnet) and in the paper. Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov/contextlocnet/issues) directly, for other inquiries please contact [Vadim Kantorov](mailto:vadim.kantorov@gmail.com).
 
-This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
+This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oquab](http://github.com/qassemoquab), [Minsu Cho](http://www.di.ens.fr/~mcho), and [Ivan Laptev](http://www.di.ens.fr/~laptev).
 
 # Running the code
 1. Install the dependencies: [Torch](http://github.com/torch/distro) with [cuDNN](http://developer.nvidia.com/cudnn) support; [HDF5](http://www.hdfgroup.org/HDF5/); [matio](http://github.com/tbeu/matio); [protobuf](http://github.com/google/protobuf); Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch), [loadcaffe](http://github.com/szagoruyko/loadcaffe).
