@@ -17,11 +17,13 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   We strongly recommend using [wigwam](http://wigwam.in/) for this (fix the paths to `nvcc` and `libcudnn.so` before running the command):
 
   ```$ wigwam install torch hdf5 matio protobuf lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"```
-2. Clone this repository and change current directory to `data`:
+2. Clone this repository, compile the ROI pooling module, and change the current directory to `data`:
 
   ```
   $ git clone https://github.com/vadimkantorov/contextlocnet
-  $ cd ./contextlocnet/data
+  $ cd ./contextlocnet/model
+  $ luarocks make
+  $ cd ../data
   ```
 3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007:
   
@@ -40,7 +42,7 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   ```
   $ wget http://www.robots.ox.ac.uk/~vgg/software/deep_eval/releases/bvlc/VGG_CNN_F.caffemodel https://gist.githubusercontent.com/ksimonyan/a32c9063ec8e1118221a/raw/6a3b8af023bae65669a4ceccd7331a5e7767aa4e/VGG_CNN_F_deploy.prototxt
   ```
-6. Extract the downloaded archives and change current directory to `contextlocnet`:
+6. Extract the downloaded archives and change the current directory back to `contextlocnet`:
 
   ```
   $ for f in *.tar *.tgz; do tar -xf $f; done
@@ -51,7 +53,6 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   ```
   $ th train.lua
   ```
-
 8. Test the trained model and compute CorLoc and mAP:
   ```
   $ SUBSET=trainval th test.lua
