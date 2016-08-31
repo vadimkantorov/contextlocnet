@@ -74,4 +74,7 @@ function VOC()
 	torch.save(opts.PATHS.DATASET_CACHED, voc)
 end
 
-_G[arg[1]]()
+for _, a in ipairs(arg) do
+	print('Preprocessing', a, '...')
+	_G[a]()
+end
