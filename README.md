@@ -23,7 +23,7 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   $ git clone https://github.com/vadimkantorov/contextlocnet
   $ cd ./contextlocnet/data
   ```
-3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and [selective search windows](http://koen.me/research/selectivesearch/):
+3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007:
   
   ```
   $ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCdevkit_08-Jun-2007.tar
