@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>ContextLocNet: Context-aware Deep Network Models for Weakly Supervised Localization</title>
+		
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<meta property="og:title" content="ContextLocNet: Context-aware Deep Network Models for Weakly Supervised Localization" />
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div class="page-header" />
+				<h1 class="text-center">ContextLocNet: Context-aware Deep Network Models<br /> for Weakly Supervised Localization</h1>
+				<div class="col-sm-offset-3">
+					<ul class="list-inline">
+						<li><h4><a href="http://vadimkantorov.com">Vadim Kantorov</a></h4></li>
+						<li><h4><a href="http://github.com/qassemoquab">Maxime Oquab</a></h4></li>
+						<li><h4><a href="http://www.di.ens.fr/~mcho">Minsu Cho</a></h4></li>
+						<li><h4><a href="https://www.di.ens.fr/~laptev">Ivan Laptev</a></h4></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<!-- magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/figures/model.pdf -trim +repage -resize 50% img/model.jpg -->
+				<img class="img-responsive center-block" src="img/model.jpg" title="ContextLocNet high-level architecture" style="width:50%" /><br />
+			</div>
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-6">
+					<h2>Paper and code</h2>
+					<div class="col-sm-2">
+						<!-- magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/eccv2016_kantorov_paper.pdf[0] -trim -resize 20% img/thumbnail.jpg -->
+						<img class="img-responsive" src="img/thumbnail.jpg" title="Paper first page" />
+					</div>
+					<div class="col-sm-3">
+						<ul class="list" style="list-style-type:square">
+							<li><a>pdf</a></li>
+							<li><a href="http://github.com/vadimkantorov/contextlocnet">code</a></li>
+							<li><a>arxiv</a></li>
+							<li><a href="#/" data-toggle="collapse" data-target=".bibtex">bibtex</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row collapse bibtex" style="margin-top:25px">
+				<pre class="col-sm-offset-3 col-sm-8">@inproceedings{kantorov2016,
+	title = {ContextLocNet: Context-aware Deep Network Models for Weakly Supervised Localization},
+	author = {Kantorov, V., Oquab, M., Cho M. and Laptev, I.},
+	booktitle = {Proc. European Conference on Computer Vision (ECCV), IEEE, 2016},
+	year = {2016}
+}</pre>
+			</div>
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-6">
+					<h2>Abstract</h2>
+					<p>We aim to localize objects in images using image-level supervision only. Previous approaches to this problem mainly focus on discriminative object regions and often fail to locate precise object boundaries. We address this problem by introducing two types of context-aware guidance models, additive and contrastive models, that leverage their surrounding context regions to improve localization. The additive model encourages the predicted object region to be supported by its surrounding context region. The contrastive model encourages the predicted object region to be outstanding from its surrounding context region. Our approach benefits from the recent success of convolutional neural networks for object recognition and extends Fast R-CNN to weakly supervised object localization. Extensive experimental evaluation on the PASCAL VOC 2007 and 2012 benchmarks shows that our context-aware approach significantly improves weakly supervised localization and detection.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-6">
+					<h2>Acknowledgements</h2>
+					<p>We greatly thank Hakan Bilen, Relja Arandjelović and Soumith Chintala for fruitful discussion and help.
+					This work was supported by the ERC grants VideoWorld and Activia, and the MSR-INRIA laboratory.</p>
+				</div>
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	</body>
+</html>
