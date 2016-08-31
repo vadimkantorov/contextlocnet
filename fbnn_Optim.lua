@@ -1,3 +1,4 @@
+-- This file is copied from Facebook FAIR's fbnn project: https://github.com/facebook/fbnn/blob/master/fbnn/Optim.lua
 -- Copyright 2004-present Facebook. All Rights Reserved.
 
 local pl = require('pl.import_into')()
