@@ -26,8 +26,8 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 (optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh)) and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model:
   
   ```
-  $ make -f data/common/Makefile download_VOC2007 download_VGGF
-  $ # make -f data/common/Makefile download_VOC2012
+  $ make -f data/common/Makefile download_and_extract_VOC2007 download_VGGF
+  $ # make -f data/common/Makefile download_and_extract_VOC2012
   ```
 4. Preprocess the VOC data and convert the VGG-F model to Torch format:
 
