@@ -17,13 +17,13 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   We strongly recommend using [wigwam](http://wigwam.in/) for this (fix the paths to `nvcc` and `libcudnn.so` before running the command):
 
   ```$ wigwam install torch hdf5 matio protobuf lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"```
-2. Clone this repository, compile the ROI pooling module and change the current directory to `data`:
+2. Clone this repository, compile the ROI pooling module and change the current directory to `data/common`:
 
   ```
   $ git clone https://github.com/vadimkantorov/contextlocnet
   $ cd ./contextlocnet/model
   $ luarocks make
-  $ cd ../data
+  $ cd ../data/common
   ```
 3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007:
   
@@ -46,7 +46,7 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 
   ```
   $ for f in *.tar *.tgz; do tar -xf $f; done
-  $ cd ..
+  $ cd ../..
   ```
 7. Preprocess the VOC data and convert the VGG-F model to Torch format:
 
