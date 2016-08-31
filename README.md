@@ -23,37 +23,36 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   $ git clone https://github.com/vadimkantorov/contextlocnet
   $ cd ./contextlocnet/data
   ```
-3. Download the [VOC](http://host.robots.ox.ac.uk/pascal/VOC/) datasets and [selective search windows](http://koen.me/research/selectivesearch/):
-  - VOC 2007:
+3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and [selective search windows](http://koen.me/research/selectivesearch/):
+  
+  ```
+  $ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCdevkit_08-Jun-2007.tar
+  $ wget http://koen.me/research/downloads/SelectiveSearchVOC2007trainval.mat http://koen.me/research/downloads/SelectiveSearchVOC2007test.mat
+  ```
+4. Optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh) for VOC 2012:
     
-    ```
-    $ wget http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCdevkit_08-Jun-2007.tar
-    $ wget http://koen.me/research/downloads/SelectiveSearchVOC2007trainval.mat http://koen.me/research/downloads/SelectiveSearchVOC2007test.mat
-    ```
-  - VOC 2012:
-    
-    ```
-    $ wget http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCdevkit_18-May-2011.tar
-    $ wget http://people.eecs.berkeley.edu/~rbg/fast-rcnn-data/selective_search_data.tgz
-    ```
-4. Download the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model:
+  ```
+  $ wget http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCdevkit_18-May-2011.tar
+  $ wget http://people.eecs.berkeley.edu/~rbg/fast-rcnn-data/selective_search_data.tgz
+  ```
+5. Download the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model:
   
   ```
   $ wget http://www.robots.ox.ac.uk/~vgg/software/deep_eval/releases/bvlc/VGG_CNN_F.caffemodel https://gist.githubusercontent.com/ksimonyan/a32c9063ec8e1118221a/raw/6a3b8af023bae65669a4ceccd7331a5e7767aa4e/VGG_CNN_F_deploy.prototxt
   ```
-5. Unpack the downloaded archives and change current directory to `contextlocnet`:
+6. Unpack the downloaded archives and change current directory to `contextlocnet`:
 
   ```
   $ for f in *.tar *.tgz; do tar -xf $f; done
   $ cd ..
   ```
-6. Train a model:
+7. Train a model:
 
   ```
   $ th train.lua
   ```
 
-7. Test the trained model and compute CorLoc and mAP:
+8. Test the trained model and compute CorLoc and mAP:
   ```
   $ SUBSET=trainval th test.lua
   $ th corloc.lua
@@ -61,7 +60,6 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   $ th detection_mAP.lua
   ```
   
-
 # Acknowledgements & Notes
 We greatly thank Hakan Bilen, Relja Arandjelović and Soumith Chintala for fruitful discussion and help.
 
