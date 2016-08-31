@@ -16,7 +16,10 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 
   We strongly recommend using [wigwam](http://wigwam.in/) for this (fix the paths to `nvcc` and `libcudnn.so` before running the command):
 
-  ```$ wigwam install torch hdf5 matio protobuf lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"```
+  ```
+  $ wigwam install torch hdf5 matio protobuf -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"
+  $ wigwam install lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe
+  ```
 2. Clone this repository and compile the ROI pooling module:
 
   ```
