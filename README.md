@@ -54,6 +54,7 @@ This is a joint work with Maxime Oquab, Minsu Cho and Ivan Laptev.
   $ th train.lua
   ```
 8. Test the trained model and compute CorLoc and mAP:
+
   ```
   $ SUBSET=trainval th test.lua
   $ th corloc.lua
