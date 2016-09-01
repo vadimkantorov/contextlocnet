@@ -20,13 +20,14 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   $ wigwam install torch hdf5 matio protobuf -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"
   $ wigwam install lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe
   ```
-2. Clone this repository and compile the ROI pooling module:
+2. Clone this repository, change the current directory to `contextlocnet`, and compile the ROI pooling module:
 
   ```
   $ git clone https://github.com/vadimkantorov/contextlocnet
-  $ (cd ./contextlocnet/model && luarocks make)
+  $ cd contextlocnet
+  $ (cd ./model && luarocks make)
   ```
-3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 (optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh)) and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model:
+3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model. Optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh) by manually downloading [VOC 2012 test data tarball](http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar) to `data/common` and then running the second command):
   
   ```
   $ make -f data/common/Makefile download_and_extract_VOC2007 download_VGGF

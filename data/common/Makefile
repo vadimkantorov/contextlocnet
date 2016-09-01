@@ -2,20 +2,19 @@ DOWNLOADS = ./data/common
 
 download_and_extract_VOC2007:
 	wget -P $(DOWNLOADS) \
+		http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCdevkit_08-Jun-2007.tar \
 		http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar \
 		http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtest_06-Nov-2007.tar \
-		http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCdevkit_08-Jun-2007.tar \
 		http://koen.me/research/downloads/SelectiveSearchVOC2007trainval.mat \
 		http://koen.me/research/downloads/SelectiveSearchVOC2007test.mat
-	cd $(DOWNLOADS) && for f in *.tar; do tar -xf $$f; done
+	cd $(DOWNLOADS) && for f in VOCdevkit_08-Jun-2007.tar VOCtrainval_06-Nov-2007.tar VOCtest_06-Nov-2007.tar; do tar -xf $$f; done && mv VOCdevkit VOCdevkit_2007
   
 download_and_extract_VOC2012:
 	wget -P $(DOWNLOADS) \
-		http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar \
-		http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar \
 		http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCdevkit_18-May-2011.tar \
+		http://host.robots.ox.ac.uk:8080/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar \
 		http://people.eecs.berkeley.edu/~rbg/fast-rcnn-data/selective_search_data.tgz
-	cd $(DOWNLOADS) && for f in *.tar *.tgz; do tar -xf $$f; done
+	cd $(DOWNLOADS) && for f in VOCdevkit_18-May-2011.tar VOCtrainval_11-May-2012.tar VOC2012test.tar selective_search_data.tgz; do tar -xf $$f; done && mv VOCdevkit VOCdevkit_2012
 
 download_VGGF:
 	wget -P $(DOWNLOADS) \
