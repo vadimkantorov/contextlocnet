@@ -46,19 +46,23 @@ PATHS =
 local DATASET = os.getenv('DATASET') or 'VOC2007'
 local NUM_EPOCHS = tonumber(os.getenv('NUM_EPOCHS')) or 30
 local SUBSET = os.getenv('SUBSET') or 'trainval'
-local MATLAB_EVAL_CMD = os.getenv('MATLAB_EVAL_CMD')
 local BASE_MODEL = 'VGGF'
 
 opts = {
+	ROI_FACTOR = 1.8,
+	SEED = 2,
+	
+	NMS_OVERLAP_THRESHOLD = 0.4,
+	NMS_SCORE_THRESHOLD = 1e-4,
+	
+	NUM_SCALES = 5,
+	NUM_EPOCHS = NUM_EPOCHS,
+	
+	OUTPUT_FIELDS = {'output_prod'},
 	DATASET = DATASET,
 	BASE_MODEL = BASE_MODEL,
-	ROI_FACTOR = 1.8,
-	OUTPUT_FIELDS = {'output_prod'},
-	SEED = 2,
-	NUM_EPOCHS = NUM_EPOCHS,
-	NUM_SCALES = 5,
+
 	SUBSET = SUBSET,
-	MATLAB_EVAL_CMD = MATLAB_EVAL_CMD,
 	PATHS = 
 	{
 		MODEL = arg[1],

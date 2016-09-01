@@ -3,10 +3,9 @@ dofile('util.lua')
 dofile('dataset.lua')
 threads = require 'threads'
 
-overlap_threshold = 0.4
-score_threshold = 1e-3 / (2 * 5)
-output_field = 'output_prod'
+local MATLAB = assert((sys.execute('which matlab') and 'matlab -r') or (sys.execute('which octave') and 'octave --eval'), 'matlab or octave not found in PATH')
 local subset = 'test'
+output_field = opts.OUTPUT_FIELDS[1]
 
 opts.SCORES_FILES = #arg >= 1 and arg or {opts.PATHS.SCORES_PATTERN:format(subset)}
 rois = hdf5_load(opts.SCORES_FILES[1], 'rois')
@@ -19,12 +18,12 @@ for i = 1, #opts.SCORES_FILES do
 	end
 end
 
-local detrespath = dataset_tools.package_submission(opts.PATHS.DATA, dataset, opts.DATASET, subset, 'comp4_det', rois, scores, nms_mask(rois, scores, overlap_threshold, score_threshold))
+local detrespath = dataset_tools.package_submission(opts.PATHS.DATA, dataset, opts.DATASET, subset, 'comp4_det', rois, scores, nms_mask(rois, scores, opts.NMS_OVERLAP_THRESHOLD, opts.NMS_SCORE_THRESHOLD))
 local opts = opts
 
-if dataset['test'].objectBoxes == nil then
+if dataset[subset].objectBoxes == nil then
 	print('detection mAP cannot be computed for ' .. opts.DATASET .. '. Quitting.')
-	print('VOC submission saved in ' .. detrespath)
+	print(('VOC submission saved in "%s/results-%s-%s-%s.tar.gz"'):format(opts.PATHS.DATA, opts.DATASET, 'comp4_det', subset))
 	os.exit(0)
 end
 
@@ -34,7 +33,7 @@ APs = torch.FloatTensor(numClasses):zero()
 jobQueue = threads.Threads(numClasses)
 for classLabelInd, classLabel in ipairs(classLabels) do
 	jobQueue:addjob(function()
-		os.execute(('matlab -nodisplay -nojvm -nosplash -r "classLabel = \'%s\'; cd(\'%s\'); addpath(\'VOCcode\'); VOCinit; VOCopts.testset = \'%s\'; VOCopts.detrespath = \'%s\'; [rec, prec, ap] = VOCevaldet(VOCopts, \'comp4\', classLabel, false); dlmwrite(sprintf(VOCopts.detrespath, \'resu4\', classLabel), ap); quit;"'):format(classLabel, paths.dirname(opts.PATHS.VOC_DEVKIT_VOCYEAR), subset, detrespath))
+		os.execute(('%s "oldpwd = pwd; cd(\'%s\'); addpath(fullfile(pwd, \'VOCcode\')); VOCinit; cd(oldpwd); VOCopts.testset = \'%s\'; VOCopts.detrespath = \'%s\'; classLabel = \'%s\'; [rec, prec, ap] = VOCevaldet(VOCopts, \'comp4\', classLabel, false); dlmwrite(sprintf(VOCopts.detrespath, \'resu4\', classLabel), ap); quit;"'):format(MATLAB, paths.dirname(opts.PATHS.VOC_DEVKIT_VOCYEAR), subset, detrespath, classLabel))
 		return tonumber(io.open(detrespath:format('resu4', classLabel)):read('*all'))
 	end, function(ap) res[output_field].by_class[classLabel] = ap; APs[classLabelInd] = ap; end)
 end

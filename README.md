@@ -12,12 +12,12 @@ The results are available on the [project website](http://www.di.ens.fr/willow/r
 This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oquab](http://github.com/qassemoquab), [Minsu Cho](http://www.di.ens.fr/~mcho), and [Ivan Laptev](http://www.di.ens.fr/~laptev).
 
 # Running the code
-1. Install the dependencies: [Torch](http://github.com/torch/distro) with [cuDNN](http://developer.nvidia.com/cudnn) support; [HDF5](http://www.hdfgroup.org/HDF5/); [matio](http://github.com/tbeu/matio); [protobuf](http://github.com/google/protobuf); Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch), [loadcaffe](http://github.com/szagoruyko/loadcaffe), [xml](https://://github.com/lubyk/xml).
+1. Install the dependencies: [Torch](http://github.com/torch/distro) with [cuDNN](http://developer.nvidia.com/cudnn) support; [HDF5](http://www.hdfgroup.org/HDF5/); [matio](http://github.com/tbeu/matio); [protobuf](http://github.com/google/protobuf); Luarocks packages [rapidjson](http://github.com/xpol/lua-rapidjson), [hdf5](http://github.com/deepmind/torch-hdf5), [matio](http://github.com/soumith/matio-ffi.torch), [loadcaffe](http://github.com/szagoruyko/loadcaffe), [xml](https://://github.com/lubyk/xml); MATLAB or [octave](https://www.gnu.org/software/octave/) binary in PATH.
 
   We strongly recommend using [wigwam](http://wigwam.in/) for this (fix the paths to `nvcc` and `libcudnn.so` before running the command):
 
   ```shell
-  wigwam install torch hdf5 matio protobuf -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"
+  wigwam install torch hdf5 matio protobuf octave -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"
   wigwam install lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe lua-xml
   wigwam in # execute this to make the installed libraries available
   ```
