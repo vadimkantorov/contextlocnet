@@ -16,42 +16,42 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 
   We strongly recommend using [wigwam](http://wigwam.in/) for this (fix the paths to `nvcc` and `libcudnn.so` before running the command):
 
-  ```
-  $ wigwam install torch hdf5 matio protobuf -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"
-  $ wigwam install lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe lua-xml
+  ```shell
+  wigwam install torch hdf5 matio protobuf -DPATH_TO_NVCC="/path/to/cuda/bin/nvcc" -DPATH_TO_CUDNN_SO="/path/to/cudnn/lib64/libcudnn.so"
+  wigwam install lua-rapidjson lua-hdf5 lua-matio lua-loadcaffe lua-xml
   ```
 2. Clone this repository, change the current directory to `contextlocnet`, and compile the ROI pooling module:
 
+  ```shell
+  git clone https://github.com/vadimkantorov/contextlocnet
+  cd contextlocnet
+  (cd ./model && luarocks make)
   ```
-  $ git clone https://github.com/vadimkantorov/contextlocnet
-  $ cd contextlocnet
-  $ (cd ./model && luarocks make)
-  ```
-3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model by running the first command. Optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh) by manually downloading [VOC 2012 test data tarball](http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar) to `data/common` and then running the second command:
+3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model by running the first command. Optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh) by manually downloading the [VOC 2012 test data tarball](http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar) to `data/common` and then running the second command:
   
-  ```
-  $ make -f data/common/Makefile download_and_extract_VOC2007 download_VGGF
-  $ # make -f data/common/Makefile download_and_extract_VOC2012
+  ```shell
+  make -f data/common/Makefile download_and_extract_VOC2007 download_VGGF
+  # make -f data/common/Makefile download_and_extract_VOC2012
   ```
 4. Choose a dataset, preprocess it, and convert the VGG-F model to the Torch format:
 
+  ```shell
+  export DATASET=VOC2007
+  th preprocess.lua VOC VGGF
   ```
-  $ export DATASET=VOC2007
-  $ th preprocess.lua VOC VGGF
-  ```
-5. Select a GPU and train a model  model (our best model is `model/contrastive_s.lua`, other choices are `model/contrastive_a.lua`, `model/additive.lua`, and `model/wsddn_repro.lua`):
+5. Select a GPU and train a model (our best model is `model/contrastive_s.lua`, other choices are `model/contrastive_a.lua`, `model/additive.lua`, and `model/wsddn_repro.lua`):
 
-  ```
-  $ export CUDA_VISIBLE_DEVICES=0
-  $ th train.lua model/contrastive_s.lua # will produce ./data/model_epoch30.h5 and ./data/log.json
+  ```shell
+  export CUDA_VISIBLE_DEVICES=0
+  th train.lua model/contrastive_s.lua # will produce ./data/model_epoch30.h5 and ./data/log.json
   ```
 6. Test the trained model and compute CorLoc and mAP:
 
-  ```
-  $ SUBSET=trainval th test.lua ./data/model_epoch30.h5
-  $ th corloc.lua
-  $ SUBSET=test th test.lua ./data/model_epoch30.h5
-  $ th detection_mAP.lua
+  ```shell
+  SUBSET=trainval th test.lua ./data/model_epoch30.h5
+  th corloc.lua
+  SUBSET=test th test.lua ./data/model_epoch30.h5
+  th detection_mAP.lua
   ```
   
 # Acknowledgements & Notes
