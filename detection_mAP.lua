@@ -34,7 +34,7 @@ APs = torch.FloatTensor(numClasses):zero()
 jobQueue = threads.Threads(numClasses)
 for classLabelInd, classLabel in ipairs(classLabels) do
 	jobQueue:addjob(function()
-		os.execute(('matlab -nodisplay -nojvm -nosplash -r "classLabel = \'%s\'; cd(\'%s\'); addpath(\'VOCcode\'); VOCinit; VOCopts.testset = \'%s\'; VOCopts.detrespath = \'%s\'; [rec, prec, ap] = VOCevaldet_fast(VOCopts, \'comp4\', classLabel, false); dlmwrite(sprintf(VOCopts.detrespath, \'resu4\', classLabel), ap); quit;"'):format(classLabel, paths.dirname(opts.PATHS.VOC_DEVKIT_VOCYEAR), subset, detrespath))
+		os.execute(('matlab -nodisplay -nojvm -nosplash -r "classLabel = \'%s\'; cd(\'%s\'); addpath(\'VOCcode\'); VOCinit; VOCopts.testset = \'%s\'; VOCopts.detrespath = \'%s\'; [rec, prec, ap] = VOCevaldet(VOCopts, \'comp4\', classLabel, false); dlmwrite(sprintf(VOCopts.detrespath, \'resu4\', classLabel), ap); quit;"'):format(classLabel, paths.dirname(opts.PATHS.VOC_DEVKIT_VOCYEAR), subset, detrespath))
 		return tonumber(io.open(detrespath:format('resu4', classLabel)):read('*all'))
 	end, function(ap) res[output_field].by_class[classLabel] = ap; APs[classLabelInd] = ap; end)
 end

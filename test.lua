@@ -2,10 +2,8 @@ dofile('opts.lua')
 dofile('util.lua')
 dofile('dataset.lua')
 dofile('model/util.lua')
-dofile('perf/util.lua')
 
 assert(os.getenv('CUDA_VISIBLE_DEVICES') ~= nil and cutorch.getDeviceCount() <= 1, 'SHOULD RUN ON ONE GPU FOR NOW')
-
 
 loaded = model_load(opts.PATHS.MODEL, opts)
 
@@ -28,6 +26,8 @@ print(meta)
 assert(model):cuda()
 assert(criterion):cuda()
 collectgarbage()
+
+tic_start = torch.tic()
 
 batch_loader:evaluate()
 model:evaluate()
@@ -85,4 +85,4 @@ hdf5_save(opts.PATHS.SCORES_PATTERN:format(subset), {
 	outputs = outputs,
 })
 
-print('DONE:', torch.toc(tic), 'sec')
+print('DONE:', torch.toc(tic_start), 'sec')

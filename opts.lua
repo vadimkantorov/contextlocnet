@@ -46,6 +46,7 @@ PATHS =
 local DATASET = os.getenv('DATASET') or 'VOC2007'
 local NUM_EPOCHS = tonumber(os.getenv('NUM_EPOCHS')) or 30
 local SUBSET = os.getenv('SUBSET') or 'trainval'
+local MATLAB_EVAL_CMD = os.getenv('MATLAB_EVAL_CMD')
 local BASE_MODEL = 'VGGF'
 
 opts = {
@@ -57,6 +58,7 @@ opts = {
 	NUM_EPOCHS = NUM_EPOCHS,
 	NUM_SCALES = 5,
 	SUBSET = SUBSET,
+	MATLAB_EVAL_CMD = MATLAB_EVAL_CMD,
 	PATHS = 
 	{
 		MODEL = arg[1],
