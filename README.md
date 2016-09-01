@@ -49,10 +49,10 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 6. Test the trained model and compute CorLoc and mAP:
 
   ```shell
-  SUBSET=trainval th test.lua ./data/model_epoch30.h5 # will produce ./data/scores_trainval.h5
-  th corloc.lua ./data/scores_trainval.h5
-  SUBSET=test th test.lua ./data/model_epoch30.h5 # will produce ./data/scores_test.h5
-  th detection_mAP.lua ./data/scores_test.h5
+  SUBSET=trainval th test.lua ./data/model_epoch30.h5	# will produce ./data/scores_trainval.h5
+  th corloc.lua ./data/scores_trainval.h5				# will produce ./data/corloc.json
+  SUBSET=test th test.lua ./data/model_epoch30.h5		# will produce ./data/scores_test.h5
+  th detection_mAP.lua ./data/scores_test.h5			# will produce ./data/detection_mAP.json
   ```
   
 # Acknowledgements & Notes
