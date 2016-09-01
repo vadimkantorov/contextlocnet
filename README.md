@@ -44,15 +44,15 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 
   ```shell
   export CUDA_VISIBLE_DEVICES=0
-  th train.lua model/contrastive_s.lua					# will produce ./data/model_epoch30.h5 and ./data/log.json
+  th train.lua model/contrastive_s.lua				  # will produce ./data/model_epoch30.h5 and ./data/log.json
   ```
 6. Test the trained model and compute CorLoc and mAP:
 
   ```shell
-  SUBSET=trainval th test.lua ./data/model_epoch30.h5	# will produce ./data/scores_trainval.h5
-  th corloc.lua ./data/scores_trainval.h5				# will produce ./data/corloc.json
-  SUBSET=test th test.lua ./data/model_epoch30.h5		# will produce ./data/scores_test.h5
-  th detection_mAP.lua ./data/scores_test.h5			# will produce ./data/detection_mAP.json
+  SUBSET=trainval th test.lua ./data/model_epoch30.h5 # will produce ./data/scores_trainval.h5
+  th corloc.lua ./data/scores_trainval.h5			  # will produce ./data/corloc.json
+  SUBSET=test th test.lua ./data/model_epoch30.h5	  # will produce ./data/scores_test.h5
+  th detection_mAP.lua ./data/scores_test.h5		  # will produce ./data/detection_mAP.json
   ```
   
 # Acknowledgements & Notes
