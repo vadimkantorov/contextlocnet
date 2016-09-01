@@ -40,7 +40,7 @@ PATHS =
 	LOG = paths.concat(DATA, 'log.json'),
 	SCORES_PATTERN = paths.concat(DATA, 'scores_%s.h5'),
 	CORLOC = paths.concat(DATA, 'corloc.json'),
-	DETECTION_MAP = paths.concat(DATA, 'detection_map.json'),
+	DETECTION_MAP = paths.concat(DATA, 'detection_mAP.json'),
 }
 
 local DATASET = os.getenv('DATASET') or 'VOC2007'
@@ -52,7 +52,7 @@ opts = {
 	DATASET = DATASET,
 	BASE_MODEL = BASE_MODEL,
 	ROI_FACTOR = 1.8,
-	OUTPUTS_FIELDS = {'output_prod'},
+	OUTPUT_FIELDS = {'output_prod'},
 	SEED = 2,
 	NUM_EPOCHS = NUM_EPOCHS,
 	NUM_SCALES = 5,
