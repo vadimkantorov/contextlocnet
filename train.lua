@@ -2,16 +2,11 @@ dofile('opts.lua')
 dofile('util.lua')
 dofile('dataset.lua')
 dofile('model/util.lua')
-dofile('perf/util.lua')
 
 require 'optim'
 dofile('fbnn_Optim.lua')
 
 assert(os.getenv('CUDA_VISIBLE_DEVICES') ~= nil and cutorch.getDeviceCount() <= 1, 'SHOULD RUN ON ONE GPU FOR NOW')
-
-opts.SEED = tonumber(os.getenv('SEED')) or torch.initialSeed()
-opts.NUM_EPOCHS = tonumber(os.getenv('NUM_EPOCHS')) or 30
-opts.MODEL = arg[1]
 
 torch.manualSeed(opts.SEED)
 cutorch.manualSeedAll(opts.SEED)
@@ -31,8 +26,8 @@ example_loader_options_preset = {
 	}
 }
 
-if paths.extname(opts.MODEL) == 'lua' then
-	loaded = model_load(opts.MODEL, opts)
+if paths.extname(opts.PATHS.MODEL) == 'lua' then
+	loaded = model_load(opts.PATHS.MODEL, opts)
 	meta = {
 		model_path = loaded.model_path,
 		opts = opts,
@@ -40,7 +35,7 @@ if paths.extname(opts.MODEL) == 'lua' then
 	}
 	log = {{meta = meta}}
 else
-	loaded = model_load(opts.MODEL)
+	loaded = model_load(opts.PATHS.MODEL)
 	meta = loaded.meta
 	log = loaded.log
 	previous_epoch = loaded.epoch

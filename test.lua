@@ -6,11 +6,8 @@ dofile('perf/util.lua')
 
 assert(os.getenv('CUDA_VISIBLE_DEVICES') ~= nil and cutorch.getDeviceCount() <= 1, 'SHOULD RUN ON ONE GPU FOR NOW')
 
-opts.NUM_SCALES = tonumber(os.getenv('NUM_SCALES')) or 5
-opts.SUBSET = os.getenv('SUBSET') or 'trainval'
-opts.MODEL = arg[1]
 
-loaded = model_load(opts.MODEL, opts)
+loaded = model_load(opts.PATHS.MODEL, opts)
 
 meta = {
 	opts = opts,

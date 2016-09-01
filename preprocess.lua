@@ -75,6 +75,7 @@ function VOC()
 end
 
 for _, a in ipairs(arg) do
-	print('Preprocessing', a, '...')
+	print('Preprocessing', a)
 	_G[a]()
 end
+print('Done')

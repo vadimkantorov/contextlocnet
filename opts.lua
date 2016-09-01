@@ -43,17 +43,24 @@ PATHS =
 	DETECTION_MAP = paths.concat(DATA, 'detection_map.json'),
 }
 
-local BASE_MODEL = 'VGGF'
 local DATASET = os.getenv('DATASET') or 'VOC2007'
-local ROI_FACTOR = tonumber(os.getenv('ROI_FACTOR')) or 1.8
+local NUM_EPOCHS = tonumber(os.getenv('NUM_EPOCHS')) or 30
+local SUBSET = os.getenv('SUBSET') or 'trainval'
+local BASE_MODEL = 'VGGF'
 
 opts = {
 	DATASET = DATASET,
 	BASE_MODEL = BASE_MODEL,
-	ROI_FACTOR = ROI_FACTOR,
+	ROI_FACTOR = 1.8,
 	OUTPUTS_FIELDS = {'output_prod'},
+	SEED = 2,
+	NUM_EPOCHS = NUM_EPOCHS,
+	NUM_SCALES = 5,
+	SUBSET = SUBSET,
 	PATHS = 
 	{
+		MODEL = arg[1],
+
 		DATA = DATA,
 		DATA_COMMON = DATA_COMMON,
 
