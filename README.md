@@ -44,7 +44,7 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 
   ```shell
   export CUDA_VISIBLE_DEVICES=0
-  th train.lua model/contrastive_s.lua # will produce ./data/model_epoch30.h5 and ./data/log.json
+  th train.lua model/contrastive_s.lua					# will produce ./data/model_epoch30.h5 and ./data/log.json
   ```
 6. Test the trained model and compute CorLoc and mAP:
 
