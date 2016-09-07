@@ -1,5 +1,5 @@
 images:
-	magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/figures/model.pdf -trim +repage -resize 50% model.jpg
+	magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/figures/model.pdf -trim +repage -resize 50% -transparent white -fuzz 10% model.png
 	magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/eccv2016_kantorov_paper.pdf[0] -trim -resize 20% thumbnail.jpg
 
 deploy:
