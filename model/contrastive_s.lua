@@ -1,4 +1,4 @@
-fc8r = nn.Linear(base_model.fc7_output_size, numClasses):named('fc8r')
+fc8r = nn.Linear(base_model.fc_layers_output_size, numClasses):named('fc8r')
 
 model = nn.Sequential():
 	add(nn.ParallelTable():
@@ -13,7 +13,7 @@ model = nn.Sequential():
 	add(nn.ConcatTable():
 		add(nn.Sequential():
 			add(nn.SelectTable(1)):
-			add(nn.Linear(base_model.fc7_output_size, numClasses):named('fc8c')):
+			add(nn.Linear(base_model.fc_layers_output_size, numClasses):named('fc8c')):
 			add(RoiReshaper:RestoreShape()):
 			named('output_fc8c')
 		):

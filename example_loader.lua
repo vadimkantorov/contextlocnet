@@ -1,11 +1,8 @@
 local ExampleLoader, parent = torch.class('ExampleLoader')
 
-function ExampleLoader:__init(dataset, example_loader_opts, channel_order, rgb_pixel_means)
-	self.scales = {{608, 800}, {496, 656}, {400, 544}, {720, 960}, {864, 1152}}
-	--self.scales = {{608, 800}, {368, 480}, {432, 576}, {528, 688}, {656, 864}, {912, 1200}}
-
-	self.channel_order = {3, 2, 1} -- BGR because we use Caffe-derived models
-	self.rgb_pixel_means = {122.7717, 115.9465, 102.9801}
+function ExampleLoader:__init(dataset, normalization_params, scales, example_loader_opts)
+	self.scales = scales
+	self.normalization_params = normalization_params
 	self.example_loader_opts = example_loader_opts
 	self.dataset = dataset
 end
@@ -21,9 +18,13 @@ local function table2d(I, J, elem_generator)
 	return res
 end
 
-local function subtract_mean(dst, src, channel_order, rgb_pixel_means)
+local function subtract_mean(dst, src, normalization_params)
+	local channel_order = assert(({rgb = {1, 2, 3}, bgr = {3, 2, 1}})[normalization_params.channel_order])
 	for c = 1, 3 do
-		dst[c]:copy(src[channel_order[c]]):add(-rgb_pixel_means[channel_order[c]])
+		dst[c]:copy(src[channel_order[c]]):add(-normalization_params.rgb_mean[channel_order[c]])
+		if normalization_params.rgb_std then
+			dst[c]:div(normalization_params.rgb_std[channel_order[c]])
+		end
 	end
 end
 
@@ -68,7 +69,7 @@ function ExampleLoader:loadExample(exampleIdx, isTrainingPhase)
 	local rois_loaded = self.dataset[o.subset]:getProposals(exampleIdx)
 	local jpeg_loaded = self.dataset[o.subset]:getJpegBytes(exampleIdx)
 	local scales = o.scales or self.scales
-	local channel_order, rgb_pixel_means = self.channel_order, self.rgb_pixel_means
+	local normalization_params = self.normalization_params
 
 	local scale_inds = isTrainingPhase and {0, torch.random(1, o.numScales)} or torch.range(0, o.numScales):totable()
 	local hflips = isTrainingPhase and (o.hflips and torch.random(0, 1) or 0) or (o.hflips and 2 or 0) -- 0 is no_flip, 1 is do_flip, 2 is both
@@ -76,7 +77,7 @@ function ExampleLoader:loadExample(exampleIdx, isTrainingPhase)
 
 	return function(indexInBatch, batchTable)
 		image = image or require 'image'
-		local img_original = image.decompressJPG(jpeg_loaded, 3, 'byte')
+		local img_original = image.decompressJPG(jpeg_loaded, 3, normalization_params.scale == 255 and 'byte' or 'float')
 		local height_original, width_original = img_original:size(2), img_original:size(3)
 
 		local rois_scale0 = rois_loaded:index(1, rois_perm:sub(1, math.min(rois_loaded:size(1), o.numRoisPerImage)):long())
@@ -88,7 +89,7 @@ function ExampleLoader:loadExample(exampleIdx, isTrainingPhase)
 			local img_scaled = scale_ind == 0 and img_original:clone() or rescale(img_original, scales[scale_ind][1], scales[scale_ind][2])
 			local width_scaled, height_scaled = img_scaled:size(3), img_scaled:size(2)
 
-			subtract_mean(images:resize(img_scaled:size()), img_scaled, channel_order, rgb_pixel_means)
+			subtract_mean(images:resize(img_scaled:size()), img_scaled, normalization_params)
 			rois:cmul(rois_scale0, torch.FloatTensor{{width_scaled / width_original, height_scaled / height_original, width_scaled / width_original, height_scaled / height_original, 1.0}}:narrow(2, 1, rois_scale0:size(2)):contiguous():expandAs(rois_scale0))
 			labels:resize(labels_loaded:size()):copy(labels_loaded)
 

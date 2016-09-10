@@ -13,8 +13,7 @@ function model_load(path, opts)
 	local opts = opts or loaded.meta.opts
 	local model_definition = io.open(loaded.model_path or loaded.meta.model_path):read('*all')
 
-	dofile(paths.concat('model', opts.BASE_MODEL .. '.lua'))
-	base_model = load_base_model(opts.PATHS.BASE_MODEL_CACHED)
+	base_model = dofile(paths.concat('model', opts.BASE_MODEL .. '.lua'))(opts.PATHS.BASE_MODEL_CACHED)
 	assert(loadstring(model_definition))()
 	
 	local function dfs(module, prefix)
@@ -71,19 +70,19 @@ function model_save(path, model, meta, epoch, log)
 end
 
 RoiReshaper = {
-	numRoisPerImage = nil,
+	inputSize = nil,
 
 	StoreShape = function(this)
 		local module = nn.Identity()
 		function module:updateOutput(input)
-			this.numRoisPerImage = input:size(2)
+			this.inputSize = input:size()
 			return nn.Identity.updateOutput(self, input)
 		end
 		return module	
 	end,
 
 	RestoreShape = function(self, singletonDimension)
-		return singletonDimension and DynamicView(function() return {-1, assert(self.numRoisPerImage), numClasses, 1} end) or DynamicView(function() return {-1, assert(self.numRoisPerImage), numClasses} end)
+		return singletonDimension and DynamicView(function() return {-1, assert(self.inputSize)[2], numClasses, 1} end) or DynamicView(function() return {-1, assert(self.inputSize)[2], numClasses} end)
 	end
 }
 
@@ -126,7 +125,7 @@ function nn.Module.findModules(self, typename, container)
 end
 
 function Probe(module, name, recursive)
-	name = name or ''
+	name = name or module_typename(module)
 	if recursive and module.modules then
 		for i = 1, #module.modules do
 			module.modules[i] = Probe(module.modules[i], module.modules[i].name or (name .. '->' .. i), recursive)

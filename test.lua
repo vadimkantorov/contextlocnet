@@ -20,7 +20,7 @@ meta = {
 	}
 }
 
-batch_loader = ParallelBatchLoader(ExampleLoader(dataset, meta.example_loader_options)):setBatchSize({evaluate = 1})
+batch_loader = ParallelBatchLoader(ExampleLoader(dataset, base_model.normalization_params, opts.IMAGE_SCALES, meta.example_loader_options)):setBatchSize({evaluate = 1})
 
 print(meta)
 assert(model):cuda()

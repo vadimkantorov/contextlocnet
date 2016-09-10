@@ -1,7 +1,7 @@
 function branch_transform_rois_share_fc_layers(base_model, transformer)
 	return nn.Sequential():
 		add(RectangularRingRoiPooling(base_model.pooled_height, base_model.pooled_width, base_model.spatial_scale, base_model.spp_correction_params, transformer)):
-		add(nn.View(-1):setNumInputDims(3)):
+		add(base_model.fc_layers_view(RoiReshaper)):
 		add(share_weight_bias(base_model.fc_layers))
 end
 

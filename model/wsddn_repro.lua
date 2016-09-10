@@ -5,16 +5,16 @@ model = nn.Sequential():
 	):
 	add(RectangularRingRoiPooling(base_model.pooled_height, base_model.pooled_width, base_model.spatial_scale, base_model.spp_correction_params)):
 	add(RoiReshaper:StoreShape()):
-	add(nn.View(-1):setNumInputDims(3)):
+	add(base_model.fc_layers_view(RoiReshaper)):
 	add(base_model.fc_layers):
 	add(nn.ConcatTable():
 		add(nn.Sequential():
-			add(nn.Linear(base_model.fc7_output_size, numClasses):named('fc8c')):
+			add(nn.Linear(base_model.fc_layers_output_size, numClasses):named('fc8c')):
 			add(RoiReshaper:RestoreShape()):
 			named('output_fc8c')
 		):
 		add(nn.Sequential():
-			add(nn.Linear(base_model.fc7_output_size, numClasses):named('fc8d')):
+			add(nn.Linear(base_model.fc_layers_output_size, numClasses):named('fc8d')):
 			add(RoiReshaper:RestoreShape(4)):
 			add(cudnn.SpatialSoftMax()):
 			add(nn.Squeeze(4)):

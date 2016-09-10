@@ -41,7 +41,7 @@ else
 	previous_epoch = loaded.epoch
 end
 
-batch_loader = ParallelBatchLoader(ExampleLoader(dataset, meta.example_loader_options)):setBatchSize({training = 1, evaluate = 1})
+batch_loader = ParallelBatchLoader(ExampleLoader(dataset, base_model.normalization_params, opts.IMAGE_SCALES, meta.example_loader_options)):setBatchSize({training = 1, evaluate = 1})
 
 print(meta)
 
@@ -69,11 +69,7 @@ for epoch = (previous_epoch or 0) + 1, opts.NUM_EPOCHS do
 		batch_images_gpu = (batch_images_gpu or torch.CudaTensor()):resize(batch_images:size()):copy(batch_images)
 		batch_labels_gpu = (batch_labels_gpu or torch.CudaTensor()):resize(batch_labels:size()):copy(batch_labels)
 
-		if nn.gModule then
-			cost = optimizer:optimize(optimalg, {batch_images_gpu, batch_rois, scale0_rois}, batch_labels_gpu, criterion)
-		else 
-			cost = optimizer:optimize(optimalg, {batch_images_gpu, batch_rois}, batch_labels_gpu, criterion)
-		end
+		cost = optimizer:optimize(optimalg, {batch_images_gpu, batch_rois}, batch_labels_gpu, criterion)
 
 		collectgarbage()
 		print('epoch', epoch, 'batch', batchIdx, cost, 'img/sec', batch_images:size(1) / torch.toc(tic))
@@ -94,12 +90,7 @@ for epoch = (previous_epoch or 0) + 1, opts.NUM_EPOCHS do
 				batch_images_gpu = (batch_images_gpu or torch.CudaTensor()):resize(batch_images:size()):copy(batch_images)
 				batch_labels_gpu = (batch_labels_gpu or torch.CudaTensor()):resize(batch_labels:size()):copy(batch_labels)
 
-				
-				if nn.gModule then
-					batch_scores = model:forward({batch_images_gpu, batch_rois, scale0_rois})
-				else
-					batch_scores = model:forward({batch_images_gpu, batch_rois})
-				end
+				batch_scores = model:forward({batch_images_gpu, batch_rois})
 
 				cost = criterion:forward(batch_scores, batch_labels_gpu)
 				
