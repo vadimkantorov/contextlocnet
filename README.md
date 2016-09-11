@@ -55,7 +55,7 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   th detection_mAP.lua ./data/scores_test.h5		  # will produce ./data/detection_mAP.json
   ```
 
-# Pretrained models
+# Pretrained models for VOC 2007
 Model | model_epoch30.h5 | log.json | corloc.json | detection_mAP.json
 --- | --- | --- | --- | ---
 contrastive_s | | | | 
