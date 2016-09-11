@@ -54,6 +54,12 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   SUBSET=test th test.lua ./data/model_epoch30.h5	  # will produce ./data/scores_test.h5
   th detection_mAP.lua ./data/scores_test.h5		  # will produce ./data/detection_mAP.json
   ```
+
+# Pretrained models
+Model | model_epoch30.h5 | log.json | corloc.json | detection_mAP.json
+--- | --- | --- | --- | ---
+contrastive_s | | | | 
+wsddn_repro | | | | 
   
 # Acknowledgements & Notes
 We greatly thank Hakan Bilen, Relja Arandjelović and Soumith Chintala for fruitful discussion and help.
