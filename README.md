@@ -58,8 +58,8 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
 # Pretrained models for VOC 2007
 Model | model_epoch30.h5 | log.json | corloc.json | detection_mAP.json
 --- | --- | --- | --- | ---
-contrastive_s | | | | 
-wsddn_repro | | | | 
+contrastive_s | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/contrastive_s_model_epoch30.h5) | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/contrastive_s_log.json) | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/contrastive_s_corloc.json) | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/contrastive_s_detection_mAP.json) 
+wsddn_repro | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/wsddn_repro_model_epoch30.h5) | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/wsddn_repro_log.json) | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/wsddn_repro_corloc.json) | [link](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/wsddn_repro_detection_mAP.json)
   
 # Acknowledgements & Notes
 We greatly thank Hakan Bilen, Relja Arandjelović and Soumith Chintala for fruitful discussion and help.
