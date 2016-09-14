@@ -30,7 +30,7 @@
 					<div class="jumbotron" style="padding: 20px">
 						<img class="img-responsive center-block" src="model.png" title="ContextLocNet high-level architecture" />
 						<br />
-						<p class="text-center">ContextLocNet high-level architecture</p>
+						<p class="text-center">ContextLocNet high-level architecture. We imrove localization by comparing an object score between a proposal and its context.</p>
 					</div>
 				</div>
 		        </div>
@@ -63,7 +63,13 @@
 					<h2>Abstract</h2>
 					<p>We aim to localize objects in images using image-level supervision only. Previous approaches to this problem mainly focus on discriminative object regions and often fail to locate precise object boundaries. We address this problem by introducing two types of context-aware guidance models, additive and contrastive models, that leverage their surrounding context regions to improve localization. The additive model encourages the predicted object region to be supported by its surrounding context region. The contrastive model encourages the predicted object region to be outstanding from its surrounding context region. Our approach benefits from the recent success of convolutional neural networks for object recognition and extends Fast R-CNN to weakly supervised object localization. Extensive experimental evaluation on the PASCAL VOC 2007 and 2012 benchmarks shows that our context-aware approach significantly improves weakly supervised localization and detection.</p>
 				</div>
+			<div class="row">
+				<div class="col-sm-offset-3 col-sm-6">
+					<h2>Detections</h2>
+					<img class="img-responsive center-block" src="detections.jpg" title="Better detections of our model compared to WSDDN (Bilen et al.)" />
+				</div>
 			</div>
+			</div>	
 			<div class="row">
 				<div class="col-sm-offset-3 col-sm-6">
 					<h2>Acknowledgements</h2>
