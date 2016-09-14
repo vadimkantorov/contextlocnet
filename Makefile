@@ -1,6 +1,9 @@
 images:
-	magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/figures/model.pdf -trim +repage -resize 50% -transparent white -fuzz 10% model.png
-	magick -density 300 http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/eccv2016_kantorov_paper.pdf[0] -trim -resize 20% thumbnail.jpg
+	wget http://raw.githubusercontent.com/vadimkantorov/contextlocnet/paper/images/model.pdf http://github.com/vadimkantorov/contextlocnet/releases/download/1.0/contextlocnet_eccv2016.pdf
+	convert -density 300 model.pdf -trim +repage -resize 50% -fuzz 10% -transparent white model.png
+	convert -density 300 contextlocnet_eccv2016.pdf[0] BMP3:thumbnail.bmp
+	convert thumbnail.bmp -trim -resize 20% thumbnail.jpg
+	rm *.pdf *.bmp
 
 deploy:
 	@#scp index.html *.jpg di.ens.fr:/users/thetis/willow/www/research/contextlocnet
