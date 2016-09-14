@@ -1,0 +1,82 @@
+%%
+%%
+
+\documentclass[runningheads]{llncs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb} %%
+%%
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{marvosym}
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{cite}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+
+
+\begin{document}
+%%
+%%
+%%
+
+\newcommand{\etal}{\textit{et al}.}
+\newcommand{\ie}{\textit{i}.\textit{e}., }
+\newcommand{\eg}{\textit{e}.\textit{g}.}
+
+\pagestyle{headings}
+\mainmatter
+%%
+
+\def\fixme#1{\textcolor{red}{[#1]}\marginpar{\textcolor{red}{FIXME}}}
+\definecolor{darkgreen}{rgb}{0,0.5,0}
+%%
+
+%%
+\def\checked#1{#1}
+
+\title{ContextLocNet: Context-Aware Deep Network Models for Weakly Supervised Localization} %%
+
+\titlerunning{ContextLocNet}
+
+\authorrunning{V. Kantorov \etal}
+
+\author{Vadim Kantorov, Maxime Oquab, Minsu Cho, and Ivan Laptev}
+
+%%
+%%
+%%
+%%
+
+\institute{WILLOW project team, Inria / ENS / CNRS, Paris, France \\
+	\email{\{vadim.kantorov,maxime.oquab,minsu.cho,ivan.laptev\}@inria.fr}
+}
+
+
+\maketitle
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\section{Introduction}
+\input{intro}
+
+\section{Related Work}
+\input{related_work}
+
+\section{Context-Aware Weakly Supervised Network}
+\input{model}
+
+\section{Experimental Evaluation}
+\input{experiments}
+
+
+
+\section{Conclusions}
+\input{conclusions}
+
+\clearpage
+
+\bibliographystyle{splncs}
+\bibliography{shortstrings,contextlocnet_eccv2016}
+\end{document}

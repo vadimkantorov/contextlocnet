@@ -1,0 +1,157 @@
+\subsection{Experimental Setup} 
+ \subsubsection{Datasets and Evaluation Measures.}
+
+We evaluate our method on PASCAL VOC 2007 dataset~\cite{Everingham10}, which is
+a common benchmark in weakly supervised object detection. This dataset contains
+2501 training images, 2510 validation images and 4952 test images, with
+bounding box annotations provided for 20 object classes. We use the standard
+trainval/test splits. 
+We also evaluate our method on PASCAL VOC 2012~\cite{pascal-voc-2012}. VOC 2012 contains the same 
+object classes as VOC 2007 and is approximately twice larger in size for both splits.
+
+For evaluation, two performance metrics are used: mAP and CorLoc. 
+Detection mAP is evaluated using the standard
+intersection-over-union (IoU) criterion defined by \cite{Everingham10}.
+Correct localization (CorLoc) \cite{Deselaers:2012ci} is a standard metric 
+for measuring localization accuracy on a training set, 
+where WSL usually provides one object localization per image for a target class.  
+CorLoc is evaluated per-class, only on positive images for
+that class, and counts the percentage of images for which the highest-scoring
+candidate provided by the method overlaps (IoU $> 0.5$) with a ground truth box.
+We evaluate this mAP and CorLoc on the test and trainval splits respectively. 
+
+\subsubsection{Implementation Details.}
+
+ROIs for VOC 2007 are directly provided by the authors of the Selective
+Search proposal algorithm~\cite{uijlings2013selective}. For VOC 2012, we use the Selective Search windows computed by Girshick~\etal~\cite{Girshick_2015_ICCV}.
+Our implementation is done using Torch~\cite{collobert2011torch7}, and we use the
+rectangular frame pooling based on the open-sourced code by Gidaris~\etal~\cite{DBLP:journals/corr/GidarisK15a,Gidaris_2015_ICCV}\footnote{\url{http://github.com/gidariss/locnet}} which 
+is itself based on Fast R-CNN~\cite{Girshick_2015_ICCV} code.  
+We use the pixel$\rightarrow$features map coordinates transform for 
+region proposals from the public implementation of \cite{He:2014wg}\footnote{\url{http://github.com/ShaoqingRen/SPP_net}}, 
+with offset parameter set to zero (see the precise procedure in our code online\footnotemark[1]).
+All of our models, including our reproduction of WSDDN, use the same transform. 
+We use the  ratio between the side of the external rectangle and the internal rectangle fixed to 1.8.\footnote{This choice for the frame parameters follows \cite{DBLP:journals/corr/GidarisK15a,Gidaris_2015_ICCV}, and the ratio is kept same for both context and frame pooling types. We have experimented with different ratios, and observed that results of our method change marginally with increasing the ratio, and drop with decreasing  the ratio.}
+Our pretrained network is the VGG-F model~\cite{Chatfield14} ported to Torch using the loadcaffe
+package~\cite{zagoruyko2015}.
+We train our networks using cuDNN~\cite{chetlur2014cudnn} on an NVidia Titan
+X GPU. All layers are fine-tuned. Our training parameters are detailed below.
+
+\subsubsection{Parameters.}
+
+%%
+%%
+%%
+%%
+For training, we use stochastic gradient descent (SGD) with momentum 0.9, dampening 0.0 on
+examples using a batch size of 1. In our experiments (both training and testing) 
+we use all ROIs for an image provided by Selective Search~\cite{uijlings2013selective} that have width and height larger than 20 pixels.
+The experiments are run for 30 epochs each. The learning rates are set to
+$10^{-5}$ for the first ten epochs, then lowered to $10^{-6}$
+until the end of training.
+We also use jittering over scales. Images are rescaled randomly into one of the
+five following sizes: $800\times 608, 656\times 496, 544\times 400, 960\times
+720, 1152\times 864$. Random horizontal flipping is also applied. 
+
+At test time, the scores are evaluated on all scales and flips, then averaged.
+Detections are filtered to have a minimum score of $10^{-4}$ and then processed by non-maxima suppression with an overlap threshold of 0.4 prior to mAP calculation.
+
+\subsection{Results and Discussion}
+\input{figures/table_corloc_mAP}
+
+We first evaluate our method on the VOC 2007 benchmark and compare results to the recent methods for weakly-supervised object detecton~\cite{Wang:2014tg,Bilen:2015uo} in Table~\ref{tab:results}.
+%%
+Specifically, we compare to the WSDDN-SSW-S setup of~\cite{Bilen:2015uo} which, similar to our method, uses VGG-F as a base model and Selective Search Windows object proposals. For fair comparison we also compare results to our re-implementation of WSDDN-SSW-S (row (f) in Table~\ref{tab:results}). The original WSDDN-SSW-S employs an additional softmax in the classification stream and uses binary cross-entropy instead of hinge loss, but we found that these differences to have minor effect on the detection accuracy in our experiments (performance matches up to 1\%, see rows (d) and (f)).
+
+Our best model, contrastive S, reaches 36.3\% mAP and outperforms previous WSL methods using selective search object proposals in rows (a)-(e) of Table~\ref{tab:results}.
+%%
+Class-specific CorLoc and AP results can be found in Tables~\ref{tab:results_by_class} and \ref{tab:results_by_class_corloc}, respectively.
+
+Bilen~\etal\cite{Bilen:2015uo} experiment with alternative options in terms of EdgeBox object proposals, rescaling ROI pooling activations by EdgeBoxes objectness score, a new regularization term and model ensembling. When combined together, these additions improve result in~\cite{Bilen:2015uo} to 39.3\%. Such improvements are orthogonal to our method and we believe our method will benefit from extensions proposed in~\cite{Bilen:2015uo}. We note that our single contrastive S model (36.3\% mAP) outperforms the ensemble of multiple models using SSW in~\cite{Bilen:2015uo} (33.3\% mAP).
+%%
+%%
+
+%%
+%%
+%%
+
+\subsubsection{Context Branch Helps.} 
+
+The additive model (row (g) in Table \ref{tab:results}) improves localization (CorLoc) and detection (mAP)  over those of  the WSDDN-SSW-S$^*$ baseline (row (f)). We also applied a context-padding technique~\cite{Girshick:2016ig} to WSDDN-SSW-S$^*$ by enlarging ROI to include context (in the localization branch). Our additive model (mAP 33.3\%) surpasses the context-padding model (mAP 30.9\%).
+Contrastive A also improves localization and detection, but performs slightly worse than the additive model (Table \ref{tab:results}, rows (g) and (h)). 
+These results show that processing the context in a separate branch helps 
+localization in the weakly supervised setup.
+
+%%
+%%
+%%
+%%
+
+\subsubsection{Contrastive Model with Frame Pooling.}
+
+The basic contrastive model above, contrastive A (see Fig. \ref{fig:models}), processes different shapes of feature maps (${\rm F_{ROI}}$ and ${\rm F_{context}}$) in the localization branch while sharing weights between ${\rm FC_{ROI}}$ and ${\rm FC_{context}}$. To the contrary, contrastive S processes the same shape of feature maps (${\rm F_{frame}}$ and ${\rm F_{context}}$) in the localization branch. As shown in rows (h) and (i) of Table \ref{tab:results}, contrastive~S greatly improves CorLoc and mAP over contrastive~A. Our hypothesis is that, since the weights are shared between the two layers in the the localization
+branch, these layers may perform better if they process the same shape of feature maps. Contrastive S obtains such a property by using frame pooling.  
+This modification allows us to significantly outperform the baselines (rows (a) - (e) in Table \ref{tab:results}). 
+We believe that the model overfits less to the central pixels, achieving better performance.
+Per-class results are presented in Tables~\ref{tab:results_by_class}~and~\ref{tab:results_by_class_corloc}.
+
+\input{figures/table_mAP_by_class}
+\input{figures/table_corloc_by_class}
+
+%%
+%%
+%%
+
+\subsubsection{PASCAL VOC 2012 Results.}
+The per-class localization results for the VOC 2012 benchmark using our contrastive model S are summarized in Table~\ref{tab:results_by_class_mAP_voc2012}(detection AP) and Table~\ref{tab:results_by_class_corloc_voc2012}(CorLoc).
+%%
+We are not aware of other weakly supervised localization methods reporting results on VOC 2012. %%
+
+\subsubsection{Observations.}
+
+We have explored several other options and made the following observations.
+Training the additive model and the contrastive model in a joint manner (adding the outputs of individual models to compute the localization score that is further processed by softmax) have not improve results in our experiments.
+Following Gidaris \etal\cite{Gidaris_2015_ICCV}, we have tried adding other types of region pooling as input to the localization branch, however, this did not improve our results significantly. It is possible that different types of context pooling other than rectangular region pooling can provide improvements. We also found that sharing the weights or replacing the context pooling with the frame pooling in our additive model degrades the performance.
+
+%%
+%%
+
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+
+
+%%
+%%
+%%
+%%
+%%
+
+\subsubsection{Qualitative Results.} 
+%%
+We illustrate examples of object detections by our method and WSDDN in Figure~\ref{fig:detexamples}.
+We observe that our method tends to provide more accurate localization results for 
+classes with localized discriminative parts. For example, for person and animal classes our method often finds
+the whole extent of the objects while previous methods tend to localize head regions.
+This is consistent with results in Table~\ref{tab:results_by_class} where, for example, the dog class obtains the highest improvement by our contrastive S model when compared to WSDDN. 
+%%
+%%
+
+Our method still suffers from the second typical failure mode of weakly supervised 
+methods, as shown in the two bottom rows of Figure \ref{fig:detexamples}, which is the 
+multiple-object case: when many objects of the same class are encountered in close 
+vicinity, they tend to be detected as a single object.
+
+\input{figures/table_mAP_by_class_voc2012}
+\input{figures/table_corloc_by_class_voc2012}

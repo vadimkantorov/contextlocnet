@@ -1,0 +1,35 @@
+\begin{table*}[]
+\footnotesize
+\begin{center}
+\begin{adjustbox}{max width=1.02\textwidth}
+
+\begin{tabular}{l@{\hskip 0.5cm}c*{20}cc}
+\toprule
+Model &  aer & bik & brd & boa & btl & bus & car & cat & cha & cow &
+tbl & dog & hrs & mbk & prs & plt & shp & sfa & trn & tv & avg \\
+\midrule
+Conbis \etal\cite{Cinbis:2015wn} & 65.3&  55.0&  52.4 & 48.3&  18.2&  66.4 & 77.8 & 35.6 & 26.5 & 67.0&  46.9&  48.4 & 70.5&  69.1&  35.2&  35.2&  69.6 & 43.4&  64.6&  43.7&  52.0\\
+Wang \etal\cite{Wang:2014tg}& 80.1 & 63.9 & 51.5 & 14.9 & 21.0 & 55.7 & 74.2 & 43.5 & 26.2 & 53.4 & 16.3 & 56.7 & 58.3 & 69.5 & 14.1 & 38.3 & 58.8 & 47.2 & 49.1 & 60.9 & 48.5\\
+\midrule
+WSDDN-SSW-S$^*$	& 80.4 & 62.4 & 53.8 & \bf{28.2} & 26.0 & 68.0 & 72.5 & 45.1 & 9.3 & 64.4 & 38.8 & 35.6 & 51.4 & 77.1 & \bf{37.6} & 38.1 & 66.0 & 31.2 & 61.6 & 53.0 & 50.0 \\
+additive 		& 78.8 & 66.7 & 52.9 & 25.0 & \bf{26.3} & 68.0 & 73.6 & 44.8 & \bf{14.9} & 62.3 & 45.2 & 46.3 & 61.6 & 82.3 & 35.3 & 39.6 & \bf{69.1} & 30.9 & 62.0 & \bf{69.5} & 52.8 \\
+contrastive A 	& 78.8 & 62.7 & 51.1 & 20.2 & 21.8 & 68.5 & 71.6 & \bf{55.8} & 10.3 & \bf{67.8} & 46.8 & 53.7 & 62.2 & 82.3 & 26.0 & \bf{40.7} & 55.7 & 33.6 & 55.5 & 39.4 & 50.2 \\
+contrastive S 	& \bf{83.3} & \bf{68.6} & \bf{54.7} & 23.4 & 18.3 & \bf{73.6} & \bf{74.1} & 54.1 & 8.6 & 65.1 & \bf{47.1} & \bf{59.5} & \bf{67.0} & \bf{83.5} & 35.3 & 39.9 & 67.0 & \bf{49.7} & \bf{63.5} & 65.2 & \bf{55.1} \\
+
+
+%%
+%%
+%%
+%%
+%%
+\bottomrule
+\end{tabular}
+
+\end{adjustbox}
+\caption{Per-class comparison of our proposed models on VOC 2007 with the state of the art, CorLoc (\%)}
+\label{tab:results_by_class_corloc}
+
+
+\end{center}
+\vspace{-8ex}
+\end{table*}

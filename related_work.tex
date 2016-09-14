@@ -1,0 +1,108 @@
+
+%%
+
+In both computer vision and machine learning, there has been a large body of recent research on WSL~\cite{Anonymous:2007fd,shi2012transfer,siva2012defence,Deselaers:2012ci,Siva2013,song2014learning,song14slsvm,bilen2014weakly,bilen2015weakly,Wang:2014tg,Cinbis:2015wn,Oquab:2015us,Bilen:2015uo,Jaderberg:2015vo,Zhou:2015wx}. 
+Such methods typically attempt
+to localize objects in the form of bounding boxes with visually consistent
+appearance in the training images, where multiple objects in different viewpoints
+and configurations appear in cluttered backgrounds.  Most of existing approaches
+to WSL are formulated as or are closely related to multiple instance learning
+(MIL)~\cite{long1998pac}, where each positive image has at least one true
+bounding box for a target class, and negative images contain false boxes only.
+They typically alternate between
+estimating a discriminative representation of the object and selecting an object
+box in positive images based on this representation. Since the task consists
+in a non-convex optimization problem, WSL has focused on robust initialization
+and effective regularization strategies. 
+
+Chum and Zisserman~\cite{Anonymous:2007fd} initialize candidate boxes 
+using discriminative visual words, and  update localization by maximizing
+the average pairwise similarity across the positive images.
+Shi~\etal\cite{shi2012transfer} introduce  %%
+the Latent Dirichlet Allocation (LDA) topic model for WSL, and 
+Siva~\etal\cite{siva2012defence} %%
+%%
+%%
+propose an effective negative mining approach combined
+with discriminative saliency measures.  Deselaers~\etal\cite{Deselaers:2012ci} instead
+initialize candidate boxes using the objectness method~\cite{Anonymous:2012kg}, 
+and %%
+propose a CRF-based model that jointly localizes objects in positive training
+images. %%
+%%
+%%
+%%
+%%
+Song~\etal formulate 
+an initialization strategy for WSL as a discriminative submodular cover problem in
+a graph-based framework~\cite{song2014learning}, and develop a negative mining technique to increase robustness against incorrectly localized boxes~\cite{song14slsvm}.  Bilen~\etal
+~\cite{bilen2014weakly} propose a relaxed version of MIL that softly
+labels object instances instead of choosing the highest scoring ones.
+In~\cite{bilen2015weakly}, they also propose a discriminative convex clustering
+algorithm to jointly learn a discriminative object model and enforce the
+similarity of the localized object regions.
+%%
+%%
+%%
+Wang~\etal\cite{Wang:2014tg} propose an iterative latent semantic
+clustering algorithm based on latent Semantic Analysis (pLSA) that 
+selects the most discriminative cluster for each class in terms of its
+classification performance. 
+Cinbis~\etal\cite{Cinbis:2015wn} extend a standard MIL approach and propose a
+multi-fold strategy that splits the training data to escape bad local optima. 
+
+As CNNs have turned out to be surprisingly effective in many vision tasks
+including classification and detection,  recent state-of-the-art WSL approaches
+also build on CNN
+architectures~\cite{Oquab:2015us,Bilen:2015uo,Jaderberg:2015vo,Zhou:2015wx} or
+CNN features~\cite{Wang:2014tg,Cinbis:2015wn}.
+Cinbis~\etal\cite{Cinbis:2015wn} combine multi-fold multiple-instance learning
+with CNN features. Wang~\etal\cite{Wang:2014tg} develop a semantic
+clustering method on top of pretrained CNN features. While these methods produce
+promising results, they are not trained end-to-end.
+Oquab~\etal\cite{Oquab:2015us} propose a CNN architecture with global max
+pooling on top of its final convolutional layer.  Zhou~\etal\cite{Zhou:2015wx}
+apply global average pooling instead to encourage the network to cover the full
+extent of the object. Rather than directly providing the full extent of the
+object, however, these pooling-based approaches are limited to a position of a
+discriminative part or require a separate post-processing step to obtain the final
+localization. Jaderberg \etal~\cite{Jaderberg:2015vo} propose a CNN architecture
+with spatial transformer layers that automatically transform spatial feature
+maps to align objects to a common reference frame. Bilen~\etal
+~\cite{Bilen:2015uo} modify a region-based CNN
+architecture~\cite{Girshick_2015_ICCV} and propose a CNN with two streams, one
+focusing on recognition and the other one on localization, that performs
+simultaneously region selection and classification.  Our work is related to
+these CNN-based MIL approaches that perform WSL by end-to-end training from
+image-level labels.  In contrast to the above methods, however, we focus on a
+context-aware CNN architecture that exploits contextual relation between a
+candidate region and its surrounding regions. 
+
+While contextual information has been widely employed for object
+detection~\cite{Oliva:2007ui,Rabinovich:2007wy,Felzenszwalb:2009wx,Girshick:2016ig,Gidaris:2015cx},
+the use of context has received relatively little attention in weakly supervised or
+unsupervised localization.  Russakovsky~\etal\cite{Russakovsky:2012wj} and
+Cinbis~\etal\cite{Cinbis:2015wn} use a background descriptor computed over
+features outside a candidate box, and demonstrate that background modelling can
+improve WSL as compared to foreground modelling only. %%
+%%
+Doersch~\etal\cite{Gupta:xu09Pf6c} align contextual regions of an object patch
+to gradually discovers a visual object cluster in their method of iterative
+region prediction and context alignment. Cho~\etal\cite{Cho:2015vz,kwak2015unsupervised} propose a
+contrast-based contextual score for unsupervised object localization, which measures the contrast of
+matching scores between a candidate region and its surrounding candidate
+regions. Our context-aware CNN models are inspired by these previous approaches. 
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+%%
+We would like to emphasize that while the use of contextual information is not new in itself, we apply it to build a novel CNN architecture for WSL, that is, to
+the best of our knowledge, unique to our work. We believe that the simplicity of
+our basic models makes them extendable to a variety of weakly supervised
+computer vision tasks for more accurate localization and learning.
+%%
