@@ -11,13 +11,17 @@
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<style>
+			.jumbotron {padding: 20px}
+			.authors li {padding-left: 15px; padding-right: 20px}
+		</style>
 	</head>
 	<body>
 		<div class="container">
 			<div class="page-header" />
 				<h1 class="text-center">ContextLocNet: Context-aware Deep Network Models<br /> for Weakly Supervised Localization</h1>
 				<div class="col-sm-offset-3">
-					<ul class="list-inline">
+					<ul class="list-inline authors">
 						<li><h4><a href="http://vadimkantorov.com">Vadim Kantorov</a></h4></li>
 						<li><h4><a href="http://github.com/qassemoquab">Maxime Oquab</a></h4></li>
 						<li><h4><a href="http://www.di.ens.fr/~mcho">Minsu Cho</a></h4></li>
@@ -27,7 +31,7 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-offset-2 col-sm-8">
-					<div class="jumbotron" style="padding: 20px">
+					<div class="jumbotron">
 						<img class="img-responsive center-block" src="model.png" title="ContextLocNet high-level architecture" />
 						<br />
 						<p class="text-center">ContextLocNet improves localization by comparing an object score between a proposal and its context.</p>
