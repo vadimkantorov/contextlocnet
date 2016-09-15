@@ -7,7 +7,7 @@ If you use this code, please cite our work:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;year = {2016}  
 }
 
-The results are available on the [project website](http://www.di.ens.fr/willow/research/contextlocnet) and in the [paper](https://github.com/vadimkantorov/contextlocnet/releases/download/1.0/contextlocnet_eccv2016.pdf). Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov/contextlocnet/issues) directly, for other inquiries please contact [Vadim Kantorov](mailto:vadim.kantorov@gmail.com).
+The results are available on the [project website](http://www.di.ens.fr/willow/research/contextlocnet) and in the [paper](http://arxiv.org/pdf/1609.04331.pdf) ([arxiv](http://arxiv.org/abs/1609.04331)). Please submit bugs and ask questions on [GitHub](http://github.com/vadimkantorov/contextlocnet/issues) directly, for other inquiries please contact [Vadim Kantorov](mailto:vadim.kantorov@gmail.com).
 
 This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oquab](http://github.com/qassemoquab), [Minsu Cho](http://www.di.ens.fr/~mcho), and [Ivan Laptev](http://www.di.ens.fr/~laptev).
 
