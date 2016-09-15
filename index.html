@@ -20,6 +20,14 @@
 			.jumbotron {padding: 20px}
 			.authors {display: table; width: 100%}
 			.authors>li {display: table-cell; text-align: center}
+			.paper-thumbnail { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+					box-shadow:
+						0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+						5px 5px 0 0px #fff, /* The second layer */
+						5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+						10px 10px 0 0px #fff, /* The third layer */
+						10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+			}
 		</style>
 	</head>
 	<body>
@@ -50,7 +58,7 @@
 				<div class="col-sm-offset-3 col-sm-6">
 					<h2>Paper and code</h2>
 					<div class="col-sm-2">
-						<img class="img-responsive" src="thumbnail.jpg" alt="Paper first page" />
+						<img class="img-responsive paper-thumbnail" src="thumbnail.jpg" alt="Paper first page" />
 					</div>
 					<div class="col-sm-3">
 						<ul class="list" style="list-style-type:square">
