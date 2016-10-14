@@ -1,0 +1,65 @@
+\setbeamercolor{headline}{fg=white,bg=white}
+\setbeamercolor{title in headline}{fg=red}
+\setbeamercolor{author in headline}{fg=black}
+\setbeamercolor{institute in headline}{fg=black}
+\setbeamercolor{separation line}{bg=black}
+\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{block body}{fg=black}
+\setbeamercolor*{block title}{fg=red}
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+
+\setbeamerfont{block title}{size=\large,series=\bfseries}
+\setbeamerfont{title in headline}{size=\LARGE,series=\bfseries}
+\setbeamerfont{author in headline}{size=\large}
+\setbeamerfont{institute in headline}{size=\large}
+
+\setbeamertemplate{itemize items}{\textbullet}
+\setbeamertemplate{itemize subitems}{\textbullet}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{headline}{	
+	\leavevmode
+
+	\begin{beamercolorbox}[wd=\paperwidth]{headline}
+	\begin{columns}[T]
+
+		\begin{column}{.20\paperwidth}
+			\vskip10ex\hspace{2cm}
+			\includegraphics[width=.2\linewidth]{beamertheme/logo_ens}
+		\end{column}
+
+		\begin{column}{.60\paperwidth}
+			\vskip10ex
+			\begin{center}
+				%\usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[3ex]}
+				\usebeamercolor{title in headline}{\color{fg}\usebeamerfont{title in headline}\inserttitle\\[1ex]}
+				\usebeamercolor{author in headline}{\color{fg}\usebeamerfont{author in headline}\insertauthor\\[1ex]}
+				\usebeamercolor{institute in headline}{\color{fg}\usebeamerfont{institute in headline}\insertinstitute\\[3ex]}	
+			\end{center}
+		\end{column}
+
+		\begin{column}{.20\paperwidth}
+			\vskip10ex\hspace{2cm}
+			\includegraphics[width=.7\linewidth]{beamertheme/logo_inria}
+		\end{column}
+
+	\end{columns}
+	\end{beamercolorbox}
+}
+
+\setbeamertemplate{block begin}{
+	%\vskip.75ex
+	\begin{beamercolorbox}[leftskip=1cm,colsep*=0ex]{block title}
+		\usebeamerfont*{block title}\begin{center}\insertblocktitle\vphantom{Ag}\end{center}
+	\end{beamercolorbox}
+	{\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+	\usebeamerfont{block body}%
+	\begin{beamercolorbox}[colsep*=.75ex,sep=.75ex,colsep*=0ex,vmode]{block body}%
+	\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+\setbeamertemplate{block end}{
+	\end{beamercolorbox}
+}
