@@ -28,7 +28,7 @@ This is a joint work of [Vadim Kantorov](http://vadimkantorov.com), [Maxime Oqua
   cd contextlocnet
   (cd ./model && luarocks make)
   ```
-3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model by running the first command. Optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Rob Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh) by manually downloading the [VOC 2012 test data tarball](http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar) to `data/common` and then running the second command:
+3. Download the [VOC 2007](http://host.robots.ox.ac.uk/pascal/VOC/voc2007/) dataset and Koen van de Sande's [selective search windows](http://koen.me/research/selectivesearch/) for VOC 2007 and the [VGG-F](https://gist.github.com/ksimonyan/a32c9063ec8e1118221a) model by running the first command. Optionally download the [VOC 2012](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/) and Ross Girshick's [selective search windows](https://github.com/rbgirshick/fast-rcnn/blob/master/data/scripts/fetch_fast_rcnn_models.sh) by manually downloading the [VOC 2012 test data tarball](http://host.robots.ox.ac.uk:8080/eval/downloads/VOC2012test.tar) to `data/common` and then running the second command:
   
   ```shell
   make -f data/common/Makefile download_and_extract_VOC2007 download_VGGF
